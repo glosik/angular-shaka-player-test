@@ -3,7 +3,7 @@
 		<svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg" class="mirror">
 
 			<g *ngFor="let rec of keyframeInstances; let i=index">
-				<rect [attr.x]="rec" (click)=getFrame(rec); width="5" height="20" rx="2" fill="navy" />
+				<rect [attr.x]="rec.timestamps.length*10" (click)=getFrame(rec.timestamps.length*10); width="5" height="20" rx="2" fill="navy" />
 			</g>
 			<line x1="0" y1="0" x2="1000" y2="0" stroke="black" />
 		</svg>
@@ -11,8 +11,11 @@
 
 
 
-
-	<div *ngFor="let rec of frames; let i=index">
-		rec:{{rec}}
+<div class="d-flex flex-row">
+<div *ngFor="let rec of keyframeInstances; let i=index">
+    <span class="badge badge-pill badge-primary mr-2">{{rec.key}}</span>
+    <span>{{rec.timestamps.length*10}}</span>
 	</div>
+</div>
+	
 </div>
