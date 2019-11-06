@@ -1,0 +1,19 @@
+rect {
+  cursor:pointer;
+}
+
+.mirror {
+  transform: rotateX(180deg);  
+  // padding: .5rem;
+  // position: absolute;
+  // bottom: 0;
+  background: lighten(navy, 70%);
+}
+
+// .mirror-wrapper {
+//   height: 200px;
+//   width: 100%;
+//   background: #cdcdcd;
+//   position: relative;
+//   overflow-x: hidden;  
+// }
