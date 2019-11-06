@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { keys } from '../const';
+import { keys } from '../shared/const';
 @Component({
   selector: 'app-player-container',
   templateUrl: './player-container.component.html',

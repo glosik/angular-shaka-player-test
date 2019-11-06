@@ -7,27 +7,24 @@ import * as shaka from 'shaka-player';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements AfterViewInit, OnInit {
-  @ViewChild('videoPlayer') videoElementRef: ElementRef;
-  private _moment = '';
+  videoElement: HTMLVideoElement;
+  player;
+  manifestUri =  'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';    
+  poster = "https://upload.wikimedia.org/wikipedia/commons/c/c4/PM5544_with_non-PAL_signals.png";
+  private _moment = null;
 
+  @ViewChild('videoPlayer') videoElementRef: ElementRef;
   @Input()
-  set moment(frame: any) {
+  set moment(frame: number) {
     this._moment = frame;
     console.log(this._moment);
     if(this._moment){
       this.jumpToFrame( this._moment);
     }    
   }
-
-  get moment(): any { return this._moment; }
-  
-  videoElement: HTMLVideoElement;
-  player;
-
-  manifestUri =  'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
+  get moment(): number { return this._moment; }
 
   ngOnInit() {
-    // this.moment = 0;
   }
 
   ngAfterViewInit() {
