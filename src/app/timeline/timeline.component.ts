@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Keyframeinstance } from '../shared/keyframeinstance';
 
 @Component({
   selector: 'app-timeline',
@@ -7,18 +8,17 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
   @Output() frameEmitter = new EventEmitter<number>();
-  
+  @Input()keyframeInstances:Array<Keyframeinstance>;
 
-  @Input()keyframeInstances;
+  svgHeight = 30;
+  svgWidth = 60;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.keyframeInstances);
   }
 
-  getFrame(frame) {
-    console.log('Timeframe', frame);
+  getFrame(frame: number) {
     this.frameEmitter.emit(frame);
   }
 

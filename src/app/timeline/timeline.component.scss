@@ -7,7 +7,7 @@ rect {
   // padding: .5rem;
   // position: absolute;
   // bottom: 0;
-  background: lighten(navy, 70%);
+  // background: lighten(navy, 70%);
 }
 
 // .mirror-wrapper {
@@ -22,3 +22,7 @@ rect {
 .color-1 { fill: crimson;  background: crimson; }
 .color-2 { fill: teal;  background: teal; }
 .color-3 { fill: indigo;  background: indigo; }
+
+.btn {
+  border-radius: 1.25rem;
+}

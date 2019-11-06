@@ -2,16 +2,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 /*
  * Strip snake case
  * Usage:
- *   value | keyword
+ *   value | rawcase
  * Example:
- *   {{ snake_case | keyword }}
+ *   {{ snake_case | rawcase }}
  *   formats to: snake case
 */
 
 @Pipe({
   name: 'rawcase'
 })
-export class KeywordPipe implements PipeTransform {
+export class RawcasePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     return value.split('_').join(' ');
