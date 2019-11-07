@@ -6,13 +6,15 @@
 		<app-player [moment]="frame" ></app-player>
 	</div>
 
+  <div class="row bg-light justify-content-center mb-4">
+		<app-zoom-timeline (jumpToFrame)=setFrame($event)></app-zoom-timeline>
+	</div>
+
 	<div class="row bg-light">
 		<app-timeline [keyframeInstances]="keywords" (frameEmitter)=setFrame($event)></app-timeline>
 	</div>
 
-  <div class="row bg-light">
-		<app-zoom-timeline></app-zoom-timeline>
-	</div>
+  
 
 
 </div>
