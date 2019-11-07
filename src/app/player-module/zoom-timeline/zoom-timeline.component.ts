@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
 
 @Component({
-  selector: 'app-zoom-timeline',
-  templateUrl: './zoom-timeline.component.html',
-  styleUrls: ['./zoom-timeline.component.css']
+  selector: "app-zoom-timeline",
+  templateUrl: "./zoom-timeline.component.html",
+  styleUrls: ["./zoom-timeline.component.scss"]
 })
-export class ZoomTimelineComponent implements OnInit {
+export class ZoomTimelineComponent implements OnInit, AfterViewInit {
+  @ViewChild("canvas") canvas: ElementRef;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    const ctx = this.canvas.nativeElement.getContext("2d");
+    ctx.fillStyle = "#fffddd";
+    ctx.fillRect(10, 10, 300, 100);
   }
-
 }
