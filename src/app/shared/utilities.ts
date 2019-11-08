@@ -1,14 +1,16 @@
-export static function makeTime(sec: number) {
-  
-    let hours = Math.floor(sec / 3600);
-    let minutes = Math.floor((sec - (hours * 3600)) / 60);
-    let seconds = sec - (hours * 3600) - (minutes * 60);    
+export function makeTime(sec: number) {
+    let hh: string;
+    let mm: string;
+    let ss: string;
+    const hours = Math.floor(sec / 3600);
+    const minutes = Math.floor((sec - (hours * 3600)) / 60);
+    const seconds = sec - (hours * 3600) - (minutes * 60);
 
-    if (hours < 10) { hours = "0" + hours; }
-    if (minutes < 10) { minutes = "0" + minutes; }
-    if (seconds < 10) { seconds = "0" + seconds; }
+    hh = (hours < 10) ? ('0' + hours.toString()) : hours.toString();
+    mm = (minutes < 10) ? ('0' + minutes.toString()) : minutes.toString();
+    ss = (seconds < 10) ? ('0' + seconds.toString()) : seconds.toString();
 
-    let data = hours + ':' + minutes + ':' + seconds;
+    const ts = hh + ':' + mm + ':' + ss;
 
-    return data;
+    return ts;
   }

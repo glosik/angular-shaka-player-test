@@ -22,9 +22,7 @@ export class ZoomTimelineComponent implements OnDestroy, AfterViewInit {
   private duration = 60; // seconds // make as @Input
   private canvasLeftOffset;
 
-  constructor() { }
-
- 
+  constructor() { } 
 
   ngAfterViewInit() {
     // Capture canvas
@@ -35,24 +33,28 @@ export class ZoomTimelineComponent implements OnDestroy, AfterViewInit {
     // Render all hover elements here
     this.sub = fromEvent(this.ctxEl, 'mousemove'
     ).subscribe((e: MouseEvent) => {
-      let boo = Math.round(e.pageX - this.canvasLeftOffset);
-      let sec = Math.round(boo / (this.ctxWidth / this.duration));
-      this.clearCanvas();
-      this.ctx.fillStyle = this.ctxFgr;
-      this.ctx.fillRect(boo, 2, 1, this.ctxHeight);
-      this.ctx.fillStyle = this.ctxBgr;
-      this.ctx.fillRect(boo - 18, 0, 40, 15);
-      this.ctx.fillStyle = "#000";
-      this.ctx.fillText(utilities.makeTime(sec), boo - 18, 10);
+      let hoverPosition = Math.round(e.pageX - this.canvasLeftOffset);              
+              this.clearCanvas();
+              this.moveMarkerLine(hoverPosition); 
 
     });
     // Draw elements
     this.drawCanvas();
   }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     this.sub.unsubscribe;
   }
+
+   private moveMarkerLine(hoverPosition){
+     let sec = Math.round(hoverPosition / (this.ctxWidth / this.duration));
+        this.ctx.fillStyle = this.ctxFgr;
+        this.ctx.fillRect(hoverPosition, 2, 1, this.ctxHeight);
+        this.ctx.fillStyle = this.ctxBgr;
+        this.ctx.fillRect(hoverPosition - 18, 0, 40, 15);
+        this.ctx.fillStyle = '#000';        
+        this.ctx.fillText(utilities.makeTime(sec), hoverPosition - 18, 10);
+    }
 
   private clearCanvas() {
     this.ctx.clearRect(0, 0, this.ctxWidth, this.ctxHeight);
@@ -63,21 +65,21 @@ export class ZoomTimelineComponent implements OnDestroy, AfterViewInit {
     this.drawBackdrop();
     this.drawGrid(5);
   }
-
+  // Tracking hovering states
   private hover(event) {
     this.hovering.next(true);
     this.hov = true;
-    console.log('hover', event.x);
+    // console.log('hover', event.x);
   }
+  // Tracking hovering states
   private nothover() {
     this.clearCanvas();
     this.hovering.next(false);
     this.hov = false;
-    console.log('nothover');
   }
-
+  // Tracking hovering states
   private ova(event) {
-    console.log('ova', event.x);
+    // console.log('ova', event.x);
   }
 
 
