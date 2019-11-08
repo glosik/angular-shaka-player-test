@@ -5,7 +5,7 @@ import { PlayerModule } from './player-module/player.module';
 
 import {AppComponent } from './app.component';
 
-import { RawcasePipe } from './shared/keyword.pipe';
+import { RawcasePipe } from './shared/rawcase.pipe';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, PlayerModule ],
