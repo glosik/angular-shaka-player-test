@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { keys } from '../shared/const';
+import { keys } from '../../shared/const';
+import * as utilities from '../../shared/utilities'
 @Component({
   selector: 'app-player-container',
   templateUrl: './player-container.component.html',
@@ -18,5 +19,6 @@ export class PlayerContainerComponent implements OnInit {
 
   setFrame(event){
     this.frame = event;
+    console.log('uti', utilities.makeTime(event));
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter } from "@angular/core";
+import { Subject, fromEvent, Subscription } from "rxjs";
 
 @Component({
   selector: "app-zoom-timeline",
@@ -8,6 +9,9 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Output, EventE
 export class ZoomTimelineComponent implements OnInit, AfterViewInit {
   @Output() jumpToFrame = new EventEmitter<number>();
   @ViewChild("canvas") canvas: ElementRef;
+  hovering = new Subject();
+  sub: Subscription;
+  hov = null;
   private ctxEl;
   private ctx: CanvasRenderingContext2D;
   private ctxWidth = 500;
@@ -15,27 +19,51 @@ export class ZoomTimelineComponent implements OnInit, AfterViewInit {
   private ctxBgr = 'rgba(0, 0, 200, 0.1)';
   private ctxFgr = 'rgba(0, 0, 200, 0.4)';
   private duration = 60; // seconds
+  private canvasLeftOffset;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnDestroy() { 
+    this.sub.unsubscribe;
+  }
 
   ngAfterViewInit() {
     // Capture canvas
     this.ctxEl = this.canvas.nativeElement;
-    this.ctx = this.ctxEl.getContext("2d");   
-
+    this.canvasLeftOffset = this.ctxEl.getBoundingClientRect().x;
+    this.ctx = this.ctxEl.getContext("2d");
+    
+    this.sub = fromEvent(this.ctxEl, 'mousemove'
+    ).subscribe((e: MouseEvent) => {
+      console.log(Math.round(e.pageX - this.canvasLeftOffset));
+    });
     // Draw elements
+    this.drawCanvas();
+  }
+
+  private drawCanvas() {
     this.drawBackdrop();
     this.drawGrid(5);
   }
 
-  private drawStop(){
-    
-  }
+private hover(event){
+  this.hovering.next(true);
+  this.hov = true;
+  console.log('hover', event.x);
+}
+private nothover(){
+   this.hovering.next(false);
+   this.hov = false;
+  console.log('nothover');
+}
+
+private ova(event){
+  console.log('ova', event.x);
+}
+
 
   private moveToFrame(event: MouseEvent): void {    
-    let canvasMouseX = event.x - this.ctxEl.getBoundingClientRect().x;
+    let canvasMouseX = event.x - this.canvasLeftOffset;
     let scaledSeconds  = Math.round(canvasMouseX/(this.ctxWidth/this.duration));
     console.log('click', Math.round(scaledSeconds) );
     this.jumpToFrame.emit(scaledSeconds);
@@ -56,4 +84,15 @@ export class ZoomTimelineComponent implements OnInit, AfterViewInit {
       this.ctx.stroke();
     }
   }
+
+  scaleToWidth(sec){
+    // return parseInt(this.ctxWidth/this.props.time_markers.length_seconds*sec,10);
+  }
+
+  scaleToWidthChapterZoom(sec, ch_start, ch_end){
+    // return parseInt(this.ctxWidth/(ch_end-ch_start)*(sec-ch_start),10);
+  }
+
+   
+
 }

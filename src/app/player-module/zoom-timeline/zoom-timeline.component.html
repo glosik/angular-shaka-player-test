@@ -2,5 +2,8 @@
         [attr.width]="ctxWidth" 
         [attr.height]="ctxHeight" 
         (click)="moveToFrame($event)"
+        (mouseenter)="hover($event)"
+        (mouseleave)="nothover()"
+        (mouseover)="ova($event)"
         class="timeline">
 </canvas>
