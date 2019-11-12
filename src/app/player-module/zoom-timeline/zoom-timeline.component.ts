@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, NgZone } from "@angular/core";
+import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, NgZone, Input } from "@angular/core";
 import { Subject, fromEvent, Subscription } from "rxjs";
 import * as utilities from '../../shared/utilities';
 
@@ -19,8 +19,17 @@ export class ZoomTimelineComponent implements OnDestroy, AfterViewInit {
   private ctxHeight = 100;
   private ctxBgr = 'rgba(0, 0, 200, 0.1)';
   private ctxFgr = 'rgba(0, 0, 200, 0.4)';
-  private duration = 60; // seconds // make as @Input
+  // private duration = 60; // seconds // make as @Input
   private canvasLeftOffset;
+
+    private _duration = null;  
+  @Input()
+  set duration(duration: number) {
+    this._duration = duration || 3600;
+  }
+  get duration(): number {
+    return this._duration;
+  }
 
   constructor() { } 
 

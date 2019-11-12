@@ -7,7 +7,7 @@
 	</div>
 
   <div class="row bg-light justify-content-center mb-4">
-		<app-zoom-timeline (jumpToFrame)=setFrame($event)></app-zoom-timeline>
+		<app-zoom-timeline [duration]="60" (jumpToFrame)=setFrame($event)></app-zoom-timeline>
 	</div>
 
 	<div class="row bg-light">
