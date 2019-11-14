@@ -21,10 +21,7 @@
 
 <div class="d-flex flex-row justify-content-center">
 <div *ngFor="let rec of keyframeInstances; let i=index">
-    <!-- <span class="badge badge-pill badge-primary mr-2" [ngClass]="'color-'+i">{{rec.key|rawcase}}</span> -->
     <button class="btn text-white mr-1 mt-1" [ngClass]="'color-'+i">{{rec.key|rawcase}}</button>
-    <!-- <span *ngFor="let stamp of rec.timestamps">{{stamp}}</span> -->
-    <!-- <span>{{rec.timestamps.length*10}}</span> -->
 	</div>
 </div>
 	
