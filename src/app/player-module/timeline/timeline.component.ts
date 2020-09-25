@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Keyframeinstance } from '../shared/keyframeinstance';
+import { Keyframeinstance } from '../../shared/keyframeinstance';
 
 @Component({
   selector: 'app-timeline',

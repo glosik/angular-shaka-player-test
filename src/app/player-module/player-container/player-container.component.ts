@@ -9,7 +9,7 @@ import * as utilities from '../../shared/utilities'
 export class PlayerContainerComponent implements OnInit {
   frame;
 
-  keywords = [20,30,55];
+  keywords:any = [20,30,55];
 
   constructor(){}
 
